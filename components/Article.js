@@ -90,6 +90,7 @@ const data = [
 ];
 
 /*
+
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
@@ -102,15 +103,61 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+  */
 
-  Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
-  This listener should toggle the class 'article-open' on div.article.
 
-  Step 3: Don't forget to return something from your function!
+  //Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
+  //This listener should toggle the class 'article-open' on div.article.
 
-  Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
-  to create a div.article element and append it to the DOM inside div.articles (see index.html).
+  //Step 3: Don't forget to return something from your function!
 
-  Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
-  Refresh the page to see the new article.
-*/
+  //Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
+  //to create a div.article element and append it to the DOM inside div.articles (see index.html).
+
+  //Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
+  //Refresh the page to see the new article.
+
+
+  //Declaring variables
+  function articleMaker(article){
+    const container = document.createElement('div');
+    const titleArticle = document.createElement('h2');
+    const dateArticle = document.createElement('p');
+    const paraOne = document.createElement('p');
+    const paraTwo = document.createElement('p');
+    const paraThree = document.createElement('p');
+    const expandButton = document.createElement('span');
+  
+    //Appending children
+    container.appendChild(titleArticle);
+    container.appendChild(dateArticle);
+    container.appendChild(paraOne);
+    container.appendChild(paraTwo);
+    container.appendChild(paraThree);
+    container.appendChild(expandButton);
+
+    //Adding text to the page
+    titleArticle.textContent = article.title;
+    dateArticle.textContent = article.date;
+    paraOne.textContent = article.firstParagraph;
+    paraTwo.textContent = article.secondParagraph;
+    paraThree.textContent = article.thirdParagraph;
+    expandButton.textContent = "Expand";
+  
+    container.classList.add("article");
+    dateArticle.classList.add("date");
+    expandButton.classList.add("expandButton");
+
+    //Expanding with button
+    expandButton.addEventListener("click", () => {
+      container.classList.toggle("article-open")
+    })
+
+    return container
+  }
+
+  const articlesSection = document.querySelector('.articles')
+
+  data.forEach(article => 
+    articlesSection.appendChild(articleMaker(article)))
+   
